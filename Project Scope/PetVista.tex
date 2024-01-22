@@ -14,7 +14,7 @@
 
 \section{Introduction}
 
-PetVista -  Pet Essentials Store containing a vast list of products including Food, Treat, WinterWear, Litter, Toys, Supplements and Grooming Kit is a modern solution that simplifies how pet stores operate. It helps manage pet products efficiently. It ensures a smooth experience for the customers, With features like easy product categorization, order tracking, and customer profiles, it transforms pet retail into a seamless and customer-friendly process. PetVista plans to build an online store that contains all the pet essentials such as food, supplements, toys etc. making it easy for pet owners to manage their orders. This will be achieved by building a database for managing the information about the customers, the products, the suppliers and the delivery person.
+PetVista -  Pet Essentials Store containing a vast list of products including Food, Treat, WinterWear, Litter, Toys, Supplements and Grooming Kit is a modern solution that simplifies how pet stores operate. It helps manage pet products efficiently. It ensures a smooth experience for the customers, With features like easy product categorization, order tracking, and customer profiles, it transforms pet retail into a seamless and customer-friendly process. PetVista plans to build an online store that contains all the pet essentials such as food, supplements, toys etc. making it easy for pet owners to manage their orders. This will be achieved by building a database for managing the information about the customers, the products, the suppliers and the delivery person. Below are the project requirements briefly explaining the implementations.
 
 \section{Project Scope}
 
@@ -32,7 +32,7 @@ Upon account creation customers can browse pet products, place orders, and track
 
 \subsection{Search and Filter}
 
-Users can use search functionality for users to find pet products based on various criteria such as pet type, brand, and price range. Include filters for refining search results. They can later add the products to the cart for purchase.
+Users can use search functionality for users to find pet products based on various criteria such as pet type, brand, and price range. Include filters for refining search results. They can later add the products to the cart for purchase \emph{given the product is in stock}.
 
 \subsection{Payment Management}
 
@@ -40,16 +40,21 @@ To buy the products in the cart online orders are accepted along with options fo
 
 \subsection{Push Notifications}
 
-Customers would later recieve notifications, notifying them about order confirmations, payment successful messages, and updates on order delivery or product availability.
+Customers would later receive notifications, notifying them about order confirmations, payment successful messages, and updates on order delivery or product availability.
 
 \subsection{Order Delivery}
 
 Depending upon the location, ordered item/s the user would receive a reasonable delivery date/time.
+The delivery charges would be calculated based on the location.
 
 \subsection{Rating and Review}
 
 The customers can rate a previously purchased product from a scale of 1-5, with an option to write a review within 200 words.
 The review/rating would be accepted after checking whether the product is bought by the customer (Yes/No).
+
+\subsection{Return and Refund Policy}
+
+The customers can either return or refund the order item(s) in case of any dissatisfaction.
 
 \subsection{Data Management}
 
@@ -58,5 +63,12 @@ Data can be added, updated, and deleted for pet products from the inventory and 
 \subsection{Security Measures}
 
 Security measures would be incorporated to ensure the protection of sensitive customer data, including encryption of user credentials and personal information. 
+
+\subsection{Tech Stack}
+
+I plan on using MySQL for managing all the data storage and retrieval needs, Django for the backend and ReactJS for the frontend since Django facilitates easy interfacing with MySQL.
+
+\section{Contribution}
+Nimit Panwar - Sole Contributor (Research and Authored the document)
 
 \end{document}
