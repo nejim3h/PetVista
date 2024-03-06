@@ -169,7 +169,8 @@ INSERT INTO OrderDetails VALUES
 (3, 3, 2),
 (4, 4, 1),
 (5, 5, 2),
-(6, 6, 1),
+(6, 1, 1), -- Customer 1 also bought Dog Food
+(6, 2, 1), -- Customer 1 also bought Cat Toy
 (7, 7, 2),
 (8, 8, 1),
 (9, 9, 2),
@@ -184,6 +185,7 @@ INSERT INTO OrderDetails VALUES
 (18, 3, 1),
 (19, 4, 2),
 (20, 5, 1);
+
 
 -- Receipt
 INSERT INTO Receipt (receipt_id, order_id, amount, payment_status, email) VALUES
