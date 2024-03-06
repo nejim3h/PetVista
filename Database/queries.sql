@@ -1,16 +1,5 @@
 USE PETVISTA;
 
--- Write and execute TEN SQL queries about your application involving various relational algebraic operations supporting the application features involving database access and manipulation.
-
--- Requirements:
-
--- Diverse queries containing various select, update, etc. commands.
--- Showcase adequate relational algebraic operations.
--- Showcase your constraints
--- A document containing your relational schema.
-
--- Your must submit a text file containing SQL queries and the document
-
 -- Products with rating more than equal to 4--
 SELECT *
 FROM Product 
@@ -25,15 +14,6 @@ INNER JOIN Customer C ON O.email = C.email
 INNER JOIN DeliveryDriver DD ON O.order_id = DD.employee_id;
 
 
-SELECT C.category_name, SUM(OD.quantity) AS total_sold
-FROM Category C
-INNER JOIN Product P ON C.category_id = P.category
-INNER JOIN OrderDetails OD ON P.itemID = OD.itemID
-GROUP BY C.category_name
-ORDER BY total_sold DESC
-LIMIT 1;
-
-
 -- Cash on Delivery--
 SELECT C.email, COUNT(*) AS outstanding_receipts
 FROM Customer C
@@ -43,22 +23,10 @@ GROUP BY C.email
 HAVING COUNT(*) > 0;
 
 
-SELECT C.category_name, AVG(P.item_rating) AS average_rating
-FROM Category C
-INNER JOIN Product P ON C.category_id = P.category
-GROUP BY C.category_name;
-
-
 -- Store - Employees--
 SELECT Store.store_name, Store.city, DeliveryDriver.first_name, DeliveryDriver.last_name
 FROM Store
 LEFT JOIN DeliveryDriver ON Store.employee_id = DeliveryDriver.employee_id;
-
-
-SELECT Orders.order_id, Orders.order_date, Product.item_name, OrderDetails.quantity
-FROM Orders
-JOIN OrderDetails ON Orders.order_id = OrderDetails.order_id
-JOIN Product ON OrderDetails.itemID = Product.itemID;
 
 
 -- Average Rating for each category--
@@ -80,7 +48,7 @@ ORDER BY total_revenue DESC;
 UPDATE Product
 SET quantity = quantity + 25
 WHERE quantity < 5
-LIMIT 100;  -- Adjust the limit based on the number of rows you want to update at a time
+LIMIT 25;
 SELECT * FROM Product;
 
 
@@ -98,7 +66,6 @@ WITH ProductPairs AS (
     HAVING
         COUNT(*) >= 2
 )
-
 SELECT
     p1.item_name AS product1,
     p2.item_name AS product2,
@@ -111,22 +78,6 @@ ORDER BY
     pp.frequency DESC, p1.item_name, p2.item_name;
 
 
--- SELECT Customer.first_name, Customer.last_name, Customer.email, SUM(Cart.subtotal) AS total_purchase
--- FROM Customer
--- JOIN Orders ON Customer.email = Orders.email
--- JOIN Cart ON Orders.order_id = Cart.order_id
--- GROUP BY Customer.email
--- ORDER BY total_purchase DESC
--- LIMIT 5;
-
--- SELECT Orders.order_id, Orders.order_date, SUM(Cart.subtotal) AS total_cost
--- FROM Orders
--- JOIN Cart ON Orders.order_id = Cart.order_id
--- WHERE Orders.order_date BETWEEN '2024-01-01' AND '2024-02-01'
--- GROUP BY Orders.order_id, Orders.order_date
--- LIMIT 5000;
-
-
 -- Most bought in last month--
 SELECT Product.item_name, COUNT(OrderDetails.itemID) AS total_quantity_sold
 FROM OrderDetails
@@ -137,17 +88,6 @@ GROUP BY Product.item_name
 ORDER BY total_quantity_sold DESC
 LIMIT 1;
 
-
--- UPDATE Product
--- SET item_rating = (
---     SELECT AVG(OrderDetails.item_rating)
---     FROM OrderDetails
---     JOIN Orders ON OrderDetails.order_id = Orders.order_id
---     WHERE OrderDetails.itemID = Product.itemID
--- );
--- -- Retrieve the updated ratings
--- SELECT itemID, item_name, item_rating
--- FROM Product;
 
 -- Query to list down products with their respective categories--
 SELECT Product.item_name, Category.category_name
@@ -168,12 +108,9 @@ INNER JOIN Receipt ON Orders.order_id = Receipt.order_id
 WHERE Orders.order_id = 3;
 
 
-INSERT INTO OrderDetails (order_id, itemID, quantity)
-SELECT Orders.order_id, Cart.product_id, Cart.quantity
-FROM Cart
-JOIN Orders ON Cart.email = Orders.email
-WHERE Orders.order_status = 'Completed';
-DELETE FROM Cart
-WHERE email IN (SELECT email FROM Orders WHERE order_status = 'Completed');
--- Show Cart contents before the update
-SELECT * FROM Cart;
+-- Total money spent by customers--
+SELECT email, SUM(total_cost) AS total_money_spent
+FROM Orders
+GROUP BY email
+ORDER BY total_money_spent DESC;
+
