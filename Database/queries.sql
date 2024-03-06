@@ -9,7 +9,7 @@ USE PETVISTA;
 -- Showcase your constraints
 -- A document containing your relational schema.
 
--- Your must submit a text file containing SQL queries and the document.
+-- Your must submit a text file containing SQL queries and the document
 
 SELECT *
 FROM Product
@@ -68,6 +68,11 @@ JOIN Cart ON Product.itemID = Cart.product_id
 GROUP BY Product.category
 ORDER BY total_revenue DESC;
 
+UPDATE Product
+SET quantity = quantity + 25
+WHERE quantity < 5
+LIMIT 100;  -- Adjust the limit based on the number of rows you want to update at a time
+
 
 SELECT p1.item_name AS product1, p2.item_name AS product2, COUNT(*) AS frequency
 FROM OrderDetails od1
@@ -93,7 +98,55 @@ LIMIT 5;
 -- GROUP BY Orders.order_id, Orders.order_date
 -- LIMIT 5000;
 
+SELECT Product.item_name, COUNT(OrderDetails.itemID) AS total_quantity_sold
+FROM OrderDetails
+JOIN Product ON OrderDetails.itemID = Product.itemID
+JOIN Orders ON OrderDetails.order_id = Orders.order_id
+WHERE Orders.order_date >= CURDATE() - INTERVAL 1 MONTH
+GROUP BY Product.item_name
+ORDER BY total_quantity_sold DESC
+LIMIT 1;
 
+
+-- UPDATE Product
+-- SET item_rating = (
+--     SELECT AVG(OrderDetails.item_rating)
+--     FROM OrderDetails
+--     JOIN Orders ON OrderDetails.order_id = Orders.order_id
+--     WHERE OrderDetails.itemID = Product.itemID
+-- );
+-- -- Retrieve the updated ratings
+-- SELECT itemID, item_name, item_rating
+-- FROM Product;
+
+-- Query to list down products with their respective categories--
+SELECT Product.item_name, Category.category_name
+FROM Product
+INNER JOIN Category ON Product.category = Category.category_name;
+
+
+-- Query to generate receipt-- 
+SELECT Orders.order_id, Orders.order_date, Orders.total_cost, 
+       Customer.first_name, Customer.last_name, 
+       Product.item_name, Product.item_info, OrderDetails.quantity, 
+       Receipt.amount, Receipt.payment_status
+FROM Orders
+INNER JOIN Customer ON Orders.email = Customer.email
+INNER JOIN OrderDetails ON Orders.order_id = OrderDetails.order_id
+INNER JOIN Product ON OrderDetails.itemID = Product.itemID
+INNER JOIN Receipt ON Orders.order_id = Receipt.order_id  
+WHERE Orders.order_id = 3;
+
+
+INSERT INTO OrderDetails (order_id, itemID, quantity)
+SELECT Orders.order_id, Cart.product_id, Cart.quantity
+FROM Cart
+JOIN Orders ON Cart.email = Orders.email
+WHERE Orders.order_status = 'Completed';
+DELETE FROM Cart
+WHERE email IN (SELECT email FROM Orders WHERE order_status = 'Completed');
+-- Show Cart contents before the update
+SELECT * FROM Cart;
 
 
 
