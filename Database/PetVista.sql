@@ -19,6 +19,7 @@ CREATE TABLE IF NOT EXISTS Product (
     item_name VARCHAR(30),
     category VARCHAR(30),
     quantity INT CHECK (quantity > 0),  -- Check constraint
+    price INT CHECK (price >= 0),
     image VARCHAR(100),
     item_info VARCHAR(100),
 	item_rating INT CHECK (item_rating >= 0 AND item_rating <= 5)
@@ -144,21 +145,21 @@ INSERT INTO Orders VALUES
 
 -- Product
 INSERT INTO Product VALUES
-(1, 'Dog Food', 'Pet Food', 50, 'dog_food.jpg', 'High-quality dog food for all breeds', 4),
-(2, 'Cat Toy', 'Toys', 30, 'cat_toy.jpg', 'Interactive toy for cats', 5),
-(3, 'Dog Toy', 'Toys', 35, 'dog_toy.jpg', 'Durable toy for dogs', 4),
-(4, 'Cat Food', 'Pet Food', 45, 'cat_food.jpg', 'Nutritious food for cats', 5),
-(5, 'Dog Leash', 'Accessories', 20, 'dog_leash.jpg', 'Strong and durable dog leash', 4),
-(6, 'Cat Litter', 'Accessories', 25, 'cat_litter.jpg', 'Highly absorbent cat litter', 5),
-(7, 'Dog Treat', 'Treats', 15, 'dog_treat.jpg', 'Tasty and healthy dog treats', 4),
-(8, 'Cat Treat', 'Treats', 15, 'cat_treat.jpg', 'Delicious and healthy cat treats', 5),
-(9, 'Dog Collar', 'Accessories', 20, 'dog_collar.jpg', 'Comfortable and adjustable dog collar', 4),
-(10, 'Cat Collar', 'Accessories', 20, 'cat_collar.jpg', 'Comfortable and adjustable cat collar', 5),
-(11, 'Dog Bed', 'Accessories', 60, 'dog_bed.jpg', 'Comfortable and durable dog bed', 4),
-(12, 'Cat Bed', 'Accessories', 60, 'cat_bed.jpg', 'Soft and cozy cat bed', 5),
-(13, 'Dog Shampoo', 'Grooming', 20, 'dog_shampoo.jpg', 'Gentle and effective dog shampoo', 4),
-(14, 'Cat Shampoo', 'Grooming', 20, 'cat_shampoo.jpg', 'Gentle and effective cat shampoo', 5),
-(15, 'Dog Brush', 'Grooming', 15, 'dog_brush.jpg', 'Easy to use dog brush for all coat types', 4);
+(1, 'Dog Food', 'Pet Food', 50, 150, 'dog_food.jpg', 'High-quality dog food for all breeds', 4),
+(2, 'Cat Toy', 'Toys', 30, 100, 'cat_toy.jpg', 'Interactive toy for cats', 5),
+(3, 'Dog Toy', 'Toys', 35, 100, 'dog_toy.jpg', 'Durable toy for dogs', 4),
+(4, 'Cat Food', 'Pet Food', 45, 165, 'cat_food.jpg', 'Nutritious food for cats', 5),
+(5, 'Dog Leash', 'Accessories', 20, 250, 'dog_leash.jpg', 'Strong and durable dog leash', 4),
+(6, 'Cat Litter', 'Accessories', 25, 250, 'cat_litter.jpg', 'Highly absorbent cat litter', 5),
+(7, 'Dog Treat', 'Treats', 15, 250, 'dog_treat.jpg', 'Tasty and healthy dog treats', 4),
+(8, 'Cat Treat', 'Treats', 15, 200, 'cat_treat.jpg', 'Delicious and healthy cat treats', 5),
+(9, 'Dog Collar', 'Accessories', 20, 230, 'dog_collar.jpg', 'Comfortable and adjustable dog collar', 4),
+(10, 'Cat Collar', 'Accessories', 20, 250, 'cat_collar.jpg', 'Comfortable and adjustable cat collar', 5),
+(11, 'Dog Bed', 'Accessories', 60, 1500, 'dog_bed.jpg', 'Comfortable and durable dog bed', 4),
+(12, 'Cat Bed', 'Accessories', 60, 1400, 'cat_bed.jpg', 'Soft and cozy cat bed', 5),
+(13, 'Dog Shampoo', 'Grooming', 20, 500, 'dog_shampoo.jpg', 'Gentle and effective dog shampoo', 4),
+(14, 'Cat Shampoo', 'Grooming', 20, 500, 'cat_shampoo.jpg', 'Gentle and effective cat shampoo', 5),
+(15, 'Dog Brush', 'Grooming', 15, 250, 'dog_brush.jpg', 'Easy to use dog brush for all coat types', 4);
 
 -- OrderDetails
 INSERT INTO OrderDetails VALUES
