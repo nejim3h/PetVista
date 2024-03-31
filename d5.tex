@@ -1,0 +1,249 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{algorithm}
+\usepackage{algpseudocode}
+\usepackage{xcolor}
+
+\usepackage[margin=2.2cm]{geometry}
+
+\title{Project Deadline-5: DBMS Winter-2024} \author{Nimit Panwar (2022324)}
+
+\date{31 March 2024} \begin{document}
+
+\maketitle
+
+\vspace{3mm}
+
+\section*{Ordering items and Inventory Analysis}
+
+\vspace{3mm}
+
+\begin{enumerate}
+    \item \textbf{Get Product Query:}
+    \begin{verbatim}
+$get_product = "select * from products where product_url='\$product_id'";
+    \end{verbatim}
+    This query is used to select all fields from the \texttt{products} table where the \texttt{product\_url} field matches the \texttt{\$product\_id} variable.
+    
+    \item \textbf{Get Product Category Query:}
+    \begin{verbatim}
+$get_p_cat = "select * from product_categories where p_cat_id='\$p_cat_id'";
+    \end{verbatim}
+    This query is used to select all fields from the \texttt{product\_categories} table where the \texttt{p\_cat\_id} field matches the \texttt{\$p\_cat\_id} variable.
+    
+    \item \textbf{Check Product Query:}
+    \begin{verbatim}
+$check_product = "select * from cart where ip_add='\$ip_add' AND p_id='\$p_id'";
+    \end{verbatim}
+    This query is used to select all fields from the \texttt{cart} table where the \texttt{ip\_add} field matches the \texttt{\$ip\_add} variable and the \texttt{p\_id} field matches the \texttt{\$p\_id} variable.
+    
+    \item \textbf{Get Price Query:}
+    \begin{verbatim}
+$get_price = "select * from products where product_id='\$p_id'";
+    \end{verbatim}
+    This query is used to select all fields from the \texttt{products} table where the \texttt{product\_id} field matches the \texttt{\$p\_id} variable.
+    
+    \item \textbf{Insert into Cart Query:}
+    \begin{verbatim}
+$query = "insert into cart (p_id,ip_add,qty,p_price,size) values 
+          ('\${p_id}','\${ip_add}','\${product_qty}',
+          '\${product_price}','\${product_size}')"; 
+    \end{verbatim}
+    This query is used to insert a new row into the \texttt{cart} table with the specified values.
+    
+    \item \textbf{Get Customer Query:}
+    \begin{verbatim}
+$get_customer = "select * from customers where customer_email='\$customer_session'";
+    \end{verbatim}
+    This query is used to select all fields from the \texttt{customers} table where the \texttt{customer\_email} field matches the \texttt{\$customer\_session} variable.
+    
+    \item \textbf{Select Wishlist Query:}
+    \begin{verbatim}
+$select_wishlist = "select * from wishlist where customer_id='\$customer_id' 
+                   AND product_id='\$pro_id'";
+    \end{verbatim}
+    This query is used to select all fields from the \texttt{wishlist} table where the \texttt{customer\_id} field matches the \texttt{\$customer\_id} variable and the \texttt{product\_id} field matches the \texttt{\$pro\_id} variable.
+    
+    \item \textbf{Insert into Wishlist Query:}
+    \begin{verbatim}
+$insert_wishlist = "insert into wishlist (customer_id,product_id) 
+                   values ('\${customer_id}','\${pro_id}')"; 
+    \end{verbatim}
+    This query is used to insert a new row into the \texttt{wishlist} table with the specified values.
+    
+    \item \textbf{Get Products Query:}
+    \begin{verbatim}
+$get_products = "select * from products order by rand() LIMIT 0,3";
+    \end{verbatim}
+    This query is used to select all fields from the \texttt{products} table in a random order, limiting the results to the first 3.
+    
+    
+    \item \textbf{Get Email for Login Query:}
+    \begin{verbatim}
+$get_email = "select * from customers where customer_email='$c_email'";
+    \end{verbatim}
+    This query is used to select all fields from the \texttt{customers} table where the \texttt{customer\_email} field matches the \texttt{\$c\_email} variable. It's used to check if the email is already registered.
+    
+    \item \textbf{Register Query:}
+    \begin{verbatim}
+$insert_customer = "insert into customers                                       
+                    (customer_name,customer_email,customer_pass,customer_country,
+                    customer_city,customer_contact,customer_address,
+                    customer_image,customer_ip,customer_confirm_code) values 
+                    ('$c_name','$c_email','$c_pass','$c_country','$c_city',
+                    '$c_contact','$c_address','$c_image','$c_ip',
+                    '$customer_confirm_code')";
+    \end{verbatim}
+    This query is used to insert a new row into the \texttt{customers} table with the specified values. It's used to register a new customer.
+
+    \item \textbf{Select Cart Query:}
+    \begin{verbatim}
+$select_cart = "select * from cart where ip_add='$ip_add'";
+    \end{verbatim}
+    This query is used to select all fields from the \texttt{cart} table where the \texttt{ip\_add} field matches the \texttt{\$ip\_add} variable. It's used to fetch all the items in the cart for the current user.
+    
+    \item \textbf{Get Products Query:}
+    \begin{verbatim}
+$get_products = "select * from products where product_id='$pro_id'";
+    \end{verbatim}
+    This query is used to select all fields from the \texttt{products} table where the \texttt{product\_id} field matches the \texttt{\$pro\_id} variable. It's used to fetch the details of a specific product.
+    
+    \item \textbf{Get Cart Query:}
+    \begin{verbatim}
+$get_cart = "select * from cart where p_id='$coupon_pro' AND ip_add='$ip_add'";
+    \end{verbatim}
+    This query is used to select all fields from the \texttt{cart} table where the \texttt{p\_id} field matches the \texttt{\$coupon\_pro} variable, and the \texttt{ip\_add} field matches the \texttt{\$ip\_add} variable. It's used to check if the product associated with the coupon is in the cart.
+    
+    \item \textbf{Update Cart Query:}
+    \begin{verbatim}
+$update_cart = "update cart set p_price='$coupon_price' where p_id='$coupon_pro' 
+                AND ip_add='$ip_add'";
+    \end{verbatim}
+    This query is used to update the \texttt{p\_price} field in the \texttt{cart} table where the \texttt{p\_id} field matches the \texttt{\$coupon\_pro} variable, and the \texttt{ip\_add} field matches the \texttt{\$ip\_add} variable. It's used to apply the coupon discount to the product in the cart.
+    
+    \item \textbf{Delete Product from Cart Query:}
+    \begin{verbatim}
+$delete_product = "delete from cart where p_id='$remove_id'";
+    \end{verbatim}
+    This query is used to delete a row from the \texttt{cart} table where the \texttt{p\_id} field matches the \texttt{\$remove\_id} variable. It's used to remove a product from the cart.
+    
+    \item \textbf{Insert Customer Order Query:}
+    \begin{verbatim}
+$insert_customer_order = "insert into customer_orders (customer_id,due_amount,
+invoice_no,qty,size,order_date,order_status) values ('$customer_id','$sub_total',
+'$invoice_no','$pro_qty','$pro_size',NOW(),'$status')";
+    \end{verbatim}
+    This query is used to insert a new row into the \texttt{customer\_orders} table with the specified values. It's used to create a new order for the customer.
+    
+    \item \textbf{Insert Pending Order Query:}
+    \begin{verbatim}
+$insert_pending_order = "insert into pending_orders (customer_id,invoice_no,
+product_id,qty,size,order_status) values ('$customer_id','$invoice_no',
+'$pro_id','$pro_qty','$pro_size','$status')";
+    \end{verbatim}
+    This query is used to insert a new row into the \texttt{pending\_orders} table with the specified values. It's used to add the order to the list of pending orders.
+    
+    \item \textbf{Delete Cart Query:}
+    \begin{verbatim}
+$delete_cart = "delete from cart where ip_add='$ip_add'";
+    \end{verbatim}
+    This query is used to delete all rows from the \texttt{cart} table where the \texttt{ip\_add} field matches the \texttt{\$ip\_add} variable. It's used to clear the cart after the order has been placed.
+    
+\end{enumerate}
+
+
+\section*{Customer Analysis}
+
+\vspace{3mm}
+
+\begin{enumerate}
+    \item \textbf{Get Product Categories Query:}
+    \begin{verbatim}
+$get_p_categories = "SELECT * FROM product_categories";
+    \end{verbatim}
+    This query selects all fields from the \texttt{product\_categories} table. It's used to fetch all the product categories.
+    
+    \item \textbf{Get Total Orders Query:}
+    \begin{verbatim}
+$get_total_orders = "SELECT * FROM customer_orders";
+    \end{verbatim}
+    This query selects all fields from the \texttt{customer\_orders} table. It's used to fetch all the customer orders.
+    
+    \item \textbf{Get Pending Orders Query:}
+    \begin{verbatim}
+$get_pending_orders = "SELECT * FROM customer_orders WHERE order_status='pending'";
+    \end{verbatim}
+    This query selects all fields from the \texttt{customer\_orders} table where the \texttt{order\_status} field is 'pending.' It's used to fetch all the pending customer orders.
+    
+    \item \textbf{Get Completed Orders Query:}
+    \begin{verbatim}
+$get_completed_orders = "SELECT * FROM customer_orders WHERE order_status='Complete'";
+    \end{verbatim}
+    This query selects all fields from the \texttt{customer\_orders} table where the \texttt{order\_status} field is 'Complete.' It's used to fetch all the completed customer orders.
+    
+    \item \textbf{Get Total Earnings Query:}
+    \begin{verbatim}
+$get_total_earnings = "SELECT SUM(due_amount)
+                    as Total FROM customer_orders WHERE order_status = 'Complete'";
+    \end{verbatim}
+    This query calculates the sum of the \texttt{due\_amount} field from the \texttt{customer\_orders} table where the \texttt{order\_status} field is 'Complete.' It's used to calculate the total earnings from completed orders.
+    
+    \item \textbf{Get Coupons Query:}
+    \begin{verbatim}
+$get_coupons = "SELECT * FROM coupons";
+    \end{verbatim}
+    This query selects all fields from the \texttt{coupons} table. It's used to fetch all the coupons.
+\end{enumerate}
+
+
+\vspace{5mm}
+
+
+\section*{Triggers}
+
+\vspace{3mm}
+
+1. Automatically increments coupon usage count in \texttt{coupons} table upon usage and insertion into \texttt{cart}.
+
+\begin{verbatim}
+        DELIMITER //
+        CREATE TRIGGER update_coupon_used
+        AFTER INSERT ON cart
+        FOR EACH ROW
+        BEGIN
+            DECLARE coupon_limit INT;
+            DECLARE coupon_used INT;
+        
+            SELECT coupon_limit, coupon_used INTO coupon_limit, coupon_used
+            FROM coupons
+            WHERE coupon_id = NEW.product_id;
+        
+            IF coupon_used < coupon_limit THEN
+                UPDATE coupons
+                SET coupon_used = coupon_used + 1
+                WHERE coupon_id = NEW.product_id;
+            END IF;
+        END;
+        //
+        DELIMITER ;
+\end{verbatim}
+
+2. Updates pending order status to Complete upon payment insertion
+
+\begin{verbatim}
+        DELIMITER //
+        CREATE TRIGGER update_order_status_on_payment
+        AFTER INSERT ON payment
+        FOR EACH ROW
+        BEGIN
+            UPDATE pending_orders
+            SET order_status = 'Complete'
+            WHERE invoice_no = NEW.invoice_no;
+        END;
+        //
+        DELIMITER ;
+
+\end{verbatim}
+
+\end{document}
